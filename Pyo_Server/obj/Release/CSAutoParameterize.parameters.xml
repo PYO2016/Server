@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection 데이터베이스에 액세스하기 위해 응용 프로그램에 의해 web.config에 사용된 연결 문자열입니다." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-Pyo_Server-20151124010448.mdf;Initial Catalog=aspnet-Pyo_Server-20151124010448;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\James\\Documents\\Visual\ Studio\ 2015\\Projects\\Pyo_Server\\Pyo_Server\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
