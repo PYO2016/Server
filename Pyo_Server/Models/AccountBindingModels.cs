@@ -34,6 +34,7 @@ namespace Pyo_Server.Models
 
     public class RegisterBindingModel
     {
+        [DataType(DataType.EmailAddress)]
         [Required]
         [Display(Name = "전자 메일")]
         public string Email { get; set; }
@@ -48,6 +49,9 @@ namespace Pyo_Server.Models
         [Display(Name = "암호 확인")]
         [Compare("Password", ErrorMessage = "암호와 확인 암호가 일치하지 않습니다.")]
         public string ConfirmPassword { get; set; }
+        
+        [Display(Name = "닉네임")]
+        public string Nickname { get; set; }
     }
 
     public class RegisterExternalBindingModel
@@ -67,7 +71,7 @@ namespace Pyo_Server.Models
         [Display(Name = "공급자 키")]
         public string ProviderKey { get; set; }
     }
-
+    
     public class SetPasswordBindingModel
     {
         [Required]
@@ -80,5 +84,18 @@ namespace Pyo_Server.Models
         [Display(Name = "새 암호 확인")]
         [Compare("NewPassword", ErrorMessage = "새 암호와 확인 암호가 일치하지 않습니다.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class LoginBindingModel
+    {
+        [Required]
+        [Display(Name = "전자 메일")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "{0}은(는) {2}자 이상이어야 합니다.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "암호")]
+        public string Password { get; set; }
     }
 }

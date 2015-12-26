@@ -1,3 +1,4 @@
+C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Debug\Pyo_Server.csprojResolveAssemblyReference.cache
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\roslyn\csc.exe
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -74,4 +75,3 @@ C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\M
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\System.Web.Http.Owin.xml
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Debug\Pyo_Server.dll
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Debug\Pyo_Server.pdb
-C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Debug\Pyo_Server.csprojResolveAssemblyReference.cache

@@ -66,6 +66,18 @@ namespace Pyo_Server.Controllers
             };
         }
 
+        // POST api/Account/Login
+        [AllowAnonymous]
+        [Route("Login")]
+        public async Task<IHttpActionResult> Login(LoginBindingModel model)
+        {
+            ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
+            if (user != null)
+                return Ok();
+            else
+                return NotFound();
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -328,13 +340,13 @@ namespace Pyo_Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return Ok(result);
             }
 
             return Ok();

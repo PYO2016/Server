@@ -52,12 +52,12 @@ namespace Pyo_Server.Areas.HelpPage.ModelDescriptions
                     return String.Format(CultureInfo.CurrentCulture, "Data type: {0}", dataType.CustomDataType ?? dataType.DataType.ToString());
                 }
             },
-            { typeof(RegularExpressionAttribute), a =>
+            /*{ typeof(RegularExpressionAttribute), a =>
                 {
                     RegularExpressionAttribute regularExpression = (RegularExpressionAttribute)a;
                     return String.Format(CultureInfo.CurrentCulture, "Matching regular expression pattern: {0}", regularExpression.Pattern);
                 }
-            },
+            },*/
         };
 
         // Modify this to add more default documentations.

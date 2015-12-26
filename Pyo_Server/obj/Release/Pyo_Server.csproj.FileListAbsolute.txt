@@ -74,3 +74,4 @@ C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\M
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\bin\System.Web.Http.Owin.xml
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Release\Pyo_Server.dll
 C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Release\Pyo_Server.pdb
+C:\Users\James\Documents\Visual Studio 2015\Projects\Pyo_Server\Pyo_Server\obj\Release\Pyo_Server.csprojResolveAssemblyReference.cache
