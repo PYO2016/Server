@@ -16,10 +16,24 @@ namespace Pyo_Server.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /*
         // GET: api/ParsedTables
         public IQueryable<ParsedTable> GetParsedTables()
         {
             return db.ParsedTables;
+        }
+        */
+
+        // GET: api/ParsedTables
+        public List<ParsedTableInner> GetParsedTables()
+        {
+            IQueryable<ParsedTable> tables = db.ParsedTables;
+            List<ParsedTableInner> returnVal = new List<ParsedTableInner>();
+            foreach (ParsedTable table in tables)
+            {
+                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, table.filename, table.time));
+            }
+            return returnVal;
         }
 
         // GET: api/ParsedTables/5

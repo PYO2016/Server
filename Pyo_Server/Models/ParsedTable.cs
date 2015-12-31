@@ -15,4 +15,20 @@ namespace Pyo_Server.Models
         public string filename { get; set; }
         public int time { get; set; }
     }
+
+    public class ParsedTableInner
+    {
+        public int pk { get; set; }
+        public int fk_User { get; set; }
+        public string innerfile { get; set; }
+        public int time { get; set; }
+
+        public ParsedTableInner(int pk, int fk_User, string innerfile, int time)
+        {
+            this.pk = pk;
+            this.fk_User = fk_User;
+            this.innerfile = innerfile;
+            this.time = time;
+        }
+    }
 }

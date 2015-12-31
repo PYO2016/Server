@@ -29,7 +29,7 @@ namespace Pyo_Server.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-            string root = HttpContext.Current.Server.MapPath(path);
+            string root = HttpContext.Current.Server.MapPath("~/App_Data/UploadedImages/" + pk);
             var provider = new CustomMultipartFormDataStreamProvider(root);
 
             // Read the form data and return an async task.
@@ -45,11 +45,17 @@ namespace Pyo_Server.Controllers
                 {
                     Trace.WriteLine(file.Headers.ContentDisposition.FileName);
                     Trace.WriteLine("Server file path: " + file.LocalFileName);
+                    AnalyzeImage(file.LocalFileName);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK);
             });
 
             return task;
+        }
+
+        private static async Task AnalyzeImage(String localFileName)
+        {
+
         }
     }
 

@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection 데이터베이스에 액세스하기 위해 응용 프로그램에 의해 web.config에 사용된 연결 문자열입니다." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-Pyo_Server-20151124010448.mdf;Initial Catalog=aspnet-Pyo_Server-20151124010448;Integrated Security=True" tags="SqlConnectionString">
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection 데이터베이스에 액세스하기 위해 응용 프로그램에 의해 web.config에 사용된 연결 문자열입니다." defaultValue="Server=tcp:pyoserver.database.windows.net,1433;Database=PyoServer;User ID=jonghean12@pyoserver;Password={your_password_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\James\\Documents\\Visual\ Studio\ 2015\\Projects\\Pyo_Server\\Pyo_Server\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="Pyo_Server.Models.ApplicationDbContext-Web.config Connection String" description="Pyo_Server.Models.ApplicationDbContext 데이터베이스에 액세스하기 위해 응용 프로그램에 의해 web.config에 사용된 연결 문자열입니다." defaultValue="Pyo_Server.Models.ApplicationDbContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\James\\Documents\\Visual\ Studio\ 2015\\Projects\\Pyo_Server\\Pyo_Server\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Pyo_Server.Models.ApplicationDbContext']/@connectionString" />
   </parameter>
 </parameters>
