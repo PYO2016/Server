@@ -29,21 +29,21 @@ namespace Pyo_Server.Controllers
             //sample set
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                CapturedImage a = new CapturedImage();
+                /*CapturedImage a = new CapturedImage();
                 a.filename = file.LocalFileName;
                 db.CapturedImages.Add(a);
-                db.SaveChanges();
+                db.SaveChanges();*/
                 
                 int val = -1;
                 val = getErrorCode();
             
-                ParsedTable b = new ParsedTable();
+                /*ParsedTable b = new ParsedTable();
                 b.pk = a.fk_ParsedTable;
                 b.fk_User = Convert.ToInt16(pk);
                 b.filename = "test";
                 //b.time = DateTime.Now.TO("h:mm:ss tt");
                 db.ParsedTables.Add(b);
-                db.SaveChanges();
+                db.SaveChanges();*/
             }
         }
 
