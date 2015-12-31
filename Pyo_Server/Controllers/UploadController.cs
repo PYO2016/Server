@@ -38,7 +38,7 @@ namespace Pyo_Server.Controllers
                 val = getErrorCode();
             
                 ParsedTable b = new ParsedTable();
-                b.pk - = a.fk_ParsedTable;
+                b.pk = a.fk_ParsedTable;
                 b.fk_User = Convert.ToInt16(pk);
                 b.filename = "test";
                 //b.time = DateTime.Now.TO("h:mm:ss tt");
