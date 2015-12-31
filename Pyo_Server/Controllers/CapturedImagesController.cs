@@ -17,12 +17,14 @@ namespace Pyo_Server.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/CapturedImages
+        //[TODO] 이미지 리스트들 반환
         public IQueryable<CapturedImage> GetCapturedImages()
         {
             return db.CapturedImages;
         }
 
         // GET: api/CapturedImages/5
+        //[TODO] 해당 id(primary key)에 해당되는 값 반환
         [ResponseType(typeof(CapturedImage))]
         public IHttpActionResult GetCapturedImage(int id)
         {

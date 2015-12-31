@@ -25,19 +25,22 @@ namespace Pyo_Server.Controllers
         */
 
         // GET: api/ParsedTables
+        //[TODO] 변환된 테이블 리스트들 반환(filename이 아닌 해당 파일이 가지고 있는 inner string을 반환해야됨.)
         public List<ParsedTableInner> GetParsedTables()
         {
             IQueryable<ParsedTable> tables = db.ParsedTables;
             List<ParsedTableInner> returnVal = new List<ParsedTableInner>();
             foreach (ParsedTable table in tables)
             {
-                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, table.filename, table.time));
+                //table.filename을 이용해서 해당 .txt파일 안에 있는 html 문자열을 긁어와서 아래의 생성자의 3번째 파라미터에 넣는다.
+                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, "html 문자열", table.time));
             }
             return returnVal;
         }
 
         // GET: api/ParsedTables/5
         [ResponseType(typeof(ParsedTable))]
+        //[TODO] 해당 id(primary key)에 해당되는 값 반환
         public IHttpActionResult GetParsedTable(int id)
         {
             ParsedTable parsedTable = db.ParsedTables.Find(id);

@@ -232,8 +232,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Pyo_Core\PyoCore.dll" />
-    <Content Include="Pyo_Core\PyoCore.pdb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -256,10 +254,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\PyoServer.pubxml" />
-    <Content Include="Pyo_Core\PyoCore.exp" />
-    <Content Include="Pyo_Core\PyoCore.iobj" />
-    <Content Include="Pyo_Core\PyoCore.ipdb" />
-    <Content Include="Pyo_Core\PyoCore.lib" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
