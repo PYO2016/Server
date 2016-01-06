@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -75,7 +76,7 @@ namespace Pyo_Server.Controllers
             if (user != null)
                 return Ok();
             else
-                return NotFound();
+                return BadRequest();
         }
 
         // POST api/Account/Logout

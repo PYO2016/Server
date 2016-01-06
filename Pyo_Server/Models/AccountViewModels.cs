@@ -40,4 +40,9 @@ namespace Pyo_Server.Models
 
         public string ProviderKey { get; set; }
     }
+
+    public class UserLoginViewModel
+    {
+        public string pk { get; set; }
+    }
 }

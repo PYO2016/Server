@@ -46,7 +46,7 @@ namespace Pyo_Server.Controllers
 
                     ParsedTable parTable = new ParsedTable();
                     parTable.pk = capImage.fk_ParsedTable;
-                    parTable.fk_User = Convert.ToInt32(pk);
+                    parTable.fk_User = pk;
                     parTable.filename = result;
                     parTable.time = DateTimeToInt(DateTime.Now);
                     db.ParsedTables.Add(parTable);
