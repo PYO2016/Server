@@ -69,12 +69,13 @@ namespace Pyo_Server.Controllers
 
         // POST api/Account/Login
         [AllowAnonymous]
+        [ResponseType(typeof(UserLoginViewModel))]
         [Route("Login")]
         public async Task<IHttpActionResult> Login(LoginBindingModel model)
         {
             ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
             if (user != null)
-                return Ok();
+                return Ok(new UserLoginViewModel { pk = user.Id });
             else
                 return BadRequest();
         }
