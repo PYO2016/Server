@@ -30,37 +30,55 @@ namespace Pyo_Server.Controllers
 
         // pk : fk_User
         //[TODO] PyoCore.dll의 내제된 parser 함수를 이용해 분석을 돌린 후, db에 알맞게 저장.
-        private static async Task AnalyzeImage(String pk, MultipartFileData file)
+        private static void AnalyzeImage(String pk, MultipartFileData file)
         {
-            //sample set
+            CapturedImage capImage = new CapturedImage();
+            capImage.filename = file.LocalFileName;
+            
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                db.CapturedImages.Add(capImage);
+                db.SaveChanges();
+            }
+
+            Task.Run(() =>
+            {
+                String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
+
                 try
                 {
-                    String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
-
-                    CapturedImage capImage = new CapturedImage();
-                    capImage.filename = file.LocalFileName;
-                    db.CapturedImages.Add(capImage);
-                    db.SaveChanges();
-
                     ParsedTable parTable = new ParsedTable();
                     parTable.pk = capImage.fk_ParsedTable;
                     parTable.fk_User = pk;
                     parTable.filename = result;
                     parTable.time = DateTimeToInt(DateTime.Now);
-                    db.ParsedTables.Add(parTable);
-                    db.SaveChanges();
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        db.ParsedTables.Add(parTable);
+                        db.SaveChanges();
+                    }
                 }
-                catch (PyoCore.PyoCoreException pe)
+                catch (PyoCoreException pe)
                 {
                     Trace.WriteLine("PyoCore process error : " + pe.getErrorCode());
+                    ParsedTable parTable = new ParsedTable();
+                    parTable.pk = capImage.fk_ParsedTable;
+                    parTable.fk_User = pk;
+                    parTable.filename = null;
+                    parTable.time = DateTimeToInt(DateTime.Now);
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        db.ParsedTables.Add(parTable);
+                        db.SaveChanges();
+                    }
                 }
                 finally
                 {
-                    Trace.WriteLine("AnalyzeImage() finish. pk = " + pk + ", file = " + file.LocalFileName);
+                    Trace.WriteLine("Taeguk's Task finish. pk = " + pk + ", file = " + file.LocalFileName);
                 }
-            }
+            });
+
+
         }
 
         [HttpPost]

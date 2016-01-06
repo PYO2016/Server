@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201601062053464_ModifyFuck.Designer.cs">
       <DependentUpon>201601062053464_ModifyFuck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601062139560_Hello.cs" />
+    <Compile Include="Migrations\201601062139560_Hello.Designer.cs">
+      <DependentUpon>201601062139560_Hello.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -308,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601062053464_ModifyFuck.resx">
       <DependentUpon>201601062053464_ModifyFuck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601062139560_Hello.resx">
+      <DependentUpon>201601062139560_Hello.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
