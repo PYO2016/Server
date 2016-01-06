@@ -12,38 +12,54 @@ using System.Net.Http.Headers;
 using System.IO;
 using System.Runtime.InteropServices;
 using Pyo_Server.Models;
+using PyoCore;
 
 namespace Pyo_Server.Controllers
 {
     public class UploadController : ApiController
     {
-        //bin folder에 넣으면 됨
-        [DllImport("PyoCore.dll")]
-        static extern int getErrorCode();
+        private static int DateTimeToInt(DateTime theDate)
+        {
+            return (int)(theDate.Date - new DateTime(1900, 1, 1)).TotalDays + 2;
+        }
+
+        private static DateTime IntToDateTime(int intDate)
+        {
+            return new DateTime(1900, 1, 1).AddDays(intDate - 2);
+        }
 
         // pk : fk_User
         //[TODO] PyoCore.dll의 내제된 parser 함수를 이용해 분석을 돌린 후, db에 알맞게 저장.
         private static async Task AnalyzeImage(String pk, MultipartFileData file)
         {
-
             //sample set
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                /*CapturedImage a = new CapturedImage();
-                a.filename = file.LocalFileName;
-                db.CapturedImages.Add(a);
-                db.SaveChanges();*/
-                
-                int val = -1;
-                val = getErrorCode();
-            
-                /*ParsedTable b = new ParsedTable();
-                b.pk = a.fk_ParsedTable;
-                b.fk_User = Convert.ToInt16(pk);
-                b.filename = "test";
-                //b.time = DateTime.Now.TO("h:mm:ss tt");
-                db.ParsedTables.Add(b);
-                db.SaveChanges();*/
+                try
+                {
+                    String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
+
+                    CapturedImage capImage = new CapturedImage();
+                    capImage.filename = file.LocalFileName;
+                    db.CapturedImages.Add(capImage);
+                    db.SaveChanges();
+
+                    ParsedTable parTable = new ParsedTable();
+                    parTable.pk = capImage.fk_ParsedTable;
+                    parTable.fk_User = Convert.ToInt32(pk);
+                    parTable.filename = result;
+                    parTable.time = DateTimeToInt(DateTime.Now);
+                    db.ParsedTables.Add(parTable);
+                    db.SaveChanges();
+                }
+                catch (PyoCore.PyoCoreException pe)
+                {
+                    Trace.WriteLine("PyoCore process error : " + pe.getErrorCode());
+                }
+                finally
+                {
+                    Trace.WriteLine("AnalyzeImage() finish. pk = " + pk + ", file = " + file.LocalFileName);
+                }
             }
         }
 

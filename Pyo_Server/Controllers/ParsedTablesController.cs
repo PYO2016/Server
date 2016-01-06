@@ -33,7 +33,7 @@ namespace Pyo_Server.Controllers
             foreach (ParsedTable table in tables)
             {
                 //table.filename을 이용해서 해당 .txt파일 안에 있는 html 문자열을 긁어와서 아래의 생성자의 3번째 파라미터에 넣는다.
-                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, "html 문자열", table.time));
+                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, table.filename, table.time));
             }
             return returnVal;
         }
