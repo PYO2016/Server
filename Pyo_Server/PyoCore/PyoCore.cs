@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;     // DLL support
+using System.Diagnostics;
 
 // Put PyoCore.dll in the /bin folder.
 
@@ -18,9 +19,10 @@ namespace PyoCore
             const uint len = 100000;
 
             StringBuilder buffer = new StringBuilder(Convert.ToInt32(len));
+            Trace.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@!!");
             bool success = NativePyoCore.processImageFileW(imageFileName, ImageFileType.IMAGE_FILE_TYPE_PNG,
                 buffer, len, false);
-
+            Trace.WriteLine("#############################!!" + success);
             if (!success)
             {
                 ErrorCode errorCode = NativePyoCore.getErrorCode();

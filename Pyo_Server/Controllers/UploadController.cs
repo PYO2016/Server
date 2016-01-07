@@ -43,29 +43,45 @@ namespace Pyo_Server.Controllers
 
             Task.Run(() =>
             {
-                String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
-
                 try
                 {
+                    Trace.WriteLine("Task of AnalyzeImage starts!!");
+                    String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
                     ParsedTable parTable = new ParsedTable();
-                    parTable.pk = capImage.fk_ParsedTable;
                     parTable.fk_User = pk;
                     parTable.filename = result;
                     parTable.time = DateTimeToInt(DateTime.Now);
+                    parTable.fk_CapturedImages = capImage.pk;
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        Trace.WriteLine("** let's db!!");
+                        db.ParsedTables.Add(parTable);
+                        db.SaveChanges();
+                    }
+                    Trace.WriteLine("Task of AnalyzeImage success!!");
+                }
+                catch (PyoCoreException pe)
+                {
+                    Trace.WriteLine("PyoCore process error : " + pe.getErrorCode());
+                    ParsedTable parTable = new ParsedTable();
+                    parTable.fk_User = pk;
+                    parTable.filename = null;
+                    parTable.time = DateTimeToInt(DateTime.Now);
+                    parTable.fk_CapturedImages = capImage.pk;
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                         db.ParsedTables.Add(parTable);
                         db.SaveChanges();
                     }
                 }
-                catch (PyoCoreException pe)
+                catch (Exception)
                 {
-                    Trace.WriteLine("PyoCore process error : " + pe.getErrorCode());
+                    Trace.WriteLine("mistery error : ");
                     ParsedTable parTable = new ParsedTable();
-                    parTable.pk = capImage.fk_ParsedTable;
                     parTable.fk_User = pk;
                     parTable.filename = null;
                     parTable.time = DateTimeToInt(DateTime.Now);
+                    parTable.fk_CapturedImages = capImage.pk;
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                         db.ParsedTables.Add(parTable);

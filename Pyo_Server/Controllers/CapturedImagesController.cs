@@ -46,7 +46,7 @@ namespace Pyo_Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != capturedImage.fk_ParsedTable)
+            if (id != capturedImage.pk)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace Pyo_Server.Controllers
             db.CapturedImages.Add(capturedImage);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = capturedImage.fk_ParsedTable }, capturedImage);
+            return CreatedAtRoute("DefaultApi", new { id = capturedImage.pk }, capturedImage);
         }
 
         // DELETE: api/CapturedImages/5
@@ -114,7 +114,7 @@ namespace Pyo_Server.Controllers
 
         private bool CapturedImageExists(int id)
         {
-            return db.CapturedImages.Count(e => e.fk_ParsedTable == id) > 0;
+            return db.CapturedImages.Count(e => e.pk == id) > 0;
         }
     }
 }

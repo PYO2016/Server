@@ -10,7 +10,7 @@ namespace Pyo_Server.Models
     public class CapturedImage
     {
         [Key]
-        public int fk_ParsedTable { get; set; }
+        public int pk { get; set; }
         public string filename { get; set; }
     }
 }
