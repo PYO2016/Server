@@ -10,7 +10,7 @@ namespace Pyo_Server.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "PYO2016";
 
             return View();
         }

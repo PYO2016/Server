@@ -12,26 +12,29 @@ namespace Pyo_Server.Models
         [Key]
         public int pk { get; set; }
         public string fk_User { get; set; }
+        public bool isProccessed { get; set; }
         public string filename { get; set; }
-        public int time { get; set; }
-        public int fk_CapturedImages { get; set; }
+        public string result { get; set; }
+        public DateTime time { get; set; }
     }
 
     public class ParsedTableInner
     {
         public int pk { get; set; }
         public string fk_User { get; set; }
-        public string innerfile { get; set; }
-        public int time { get; set; }
-        public int fk_CapturedImages { get; set; }
+        public bool isProccessed { get; set; }
+        public string filename { get; set; }
+        public string result { get; set; }
+        public DateTime time { get; set; }
 
-        public ParsedTableInner(int pk, string fk_User, string innerfile, int time, int fk_CapturedImages)
+        public ParsedTableInner(int pk, string fk_User, bool isProccessed, string filename, string result, DateTime time)
         {
             this.pk = pk;
             this.fk_User = fk_User;
-            this.innerfile = innerfile;
+            this.isProccessed = isProccessed;
+            this.filename = filename;
+            this.result = result;
             this.time = time;
-            this.fk_CapturedImages = fk_CapturedImages;
         }
     }
 }

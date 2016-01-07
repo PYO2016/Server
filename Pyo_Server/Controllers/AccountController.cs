@@ -52,6 +52,7 @@ namespace Pyo_Server.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+        /*
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -66,6 +67,7 @@ namespace Pyo_Server.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
+        */
 
         // POST api/Account/Login
         [AllowAnonymous]
@@ -88,6 +90,7 @@ namespace Pyo_Server.Controllers
             return Ok();
         }
 
+        /*
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
@@ -331,7 +334,7 @@ namespace Pyo_Server.Controllers
 
             return logins;
         }
-
+        */
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -354,6 +357,7 @@ namespace Pyo_Server.Controllers
             return Ok();
         }
 
+        /*
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -386,7 +390,7 @@ namespace Pyo_Server.Controllers
             }
             return Ok();
         }
-
+        */
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

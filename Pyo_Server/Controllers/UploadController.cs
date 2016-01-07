@@ -13,6 +13,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Pyo_Server.Models;
 using PyoCore;
+using System.Data.Entity;
 
 namespace Pyo_Server.Controllers
 {
@@ -32,64 +33,40 @@ namespace Pyo_Server.Controllers
         //[TODO] PyoCore.dll의 내제된 parser 함수를 이용해 분석을 돌린 후, db에 알맞게 저장.
         private static void AnalyzeImage(String pk, MultipartFileData file)
         {
-            CapturedImage capImage = new CapturedImage();
-            capImage.filename = file.LocalFileName;
-            
+            ParsedTable parTable = new ParsedTable();
+            parTable.fk_User = pk;
+            parTable.filename = file.LocalFileName;
+            parTable.time = DateTime.Now;
+            parTable.isProccessed = false;
+            parTable.result = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                db.CapturedImages.Add(capImage);
+                db.ParsedTables.Add(parTable);
                 db.SaveChanges();
             }
-
             Task.Run(() =>
             {
+                Trace.WriteLine("Task of AnalyzeImage starts!!");
                 try
                 {
-                    Trace.WriteLine("Task of AnalyzeImage starts!!");
                     String result = PyoCore.PyoCore.ProcessPngImage(file.LocalFileName);
-                    ParsedTable parTable = new ParsedTable();
-                    parTable.fk_User = pk;
-                    parTable.filename = result;
-                    parTable.time = DateTimeToInt(DateTime.Now);
-                    parTable.fk_CapturedImages = capImage.pk;
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        Trace.WriteLine("** let's db!!");
-                        db.ParsedTables.Add(parTable);
-                        db.SaveChanges();
-                    }
-                    Trace.WriteLine("Task of AnalyzeImage success!!");
+                    parTable.result = result;
                 }
-                catch (PyoCoreException pe)
+                catch (PyoCoreException)
                 {
-                    Trace.WriteLine("PyoCore process error : " + pe.getErrorCode());
-                    ParsedTable parTable = new ParsedTable();
-                    parTable.fk_User = pk;
-                    parTable.filename = null;
-                    parTable.time = DateTimeToInt(DateTime.Now);
-                    parTable.fk_CapturedImages = capImage.pk;
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        db.ParsedTables.Add(parTable);
-                        db.SaveChanges();
-                    }
                 }
                 catch (Exception)
                 {
-                    Trace.WriteLine("mistery error : ");
-                    ParsedTable parTable = new ParsedTable();
-                    parTable.fk_User = pk;
-                    parTable.filename = null;
-                    parTable.time = DateTimeToInt(DateTime.Now);
-                    parTable.fk_CapturedImages = capImage.pk;
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        db.ParsedTables.Add(parTable);
-                        db.SaveChanges();
-                    }
                 }
                 finally
                 {
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        Trace.WriteLine("** let's db!!");
+                        parTable.isProccessed = true;
+                        db.Entry(parTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
                     Trace.WriteLine("Taeguk's Task finish. pk = " + pk + ", file = " + file.LocalFileName);
                 }
             });

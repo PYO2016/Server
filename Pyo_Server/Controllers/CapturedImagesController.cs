@@ -16,6 +16,7 @@ namespace Pyo_Server.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /*
         // GET: api/CapturedImages
         //[TODO] 이미지 리스트들 반환
         public IQueryable<CapturedImage> GetCapturedImages()
@@ -116,5 +117,6 @@ namespace Pyo_Server.Controllers
         {
             return db.CapturedImages.Count(e => e.pk == id) > 0;
         }
+        */
     }
 }

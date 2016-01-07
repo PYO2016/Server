@@ -228,6 +228,18 @@
     <Compile Include="Migrations\201601062139560_Hello.Designer.cs">
       <DependentUpon>201601062139560_Hello.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601071428387_HappyDay.cs" />
+    <Compile Include="Migrations\201601071428387_HappyDay.Designer.cs">
+      <DependentUpon>201601071428387_HappyDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601071512228_CanDo.cs" />
+    <Compile Include="Migrations\201601071512228_CanDo.Designer.cs">
+      <DependentUpon>201601071512228_CanDo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601071557467_BeFree.cs" />
+    <Compile Include="Migrations\201601071557467_BeFree.Designer.cs">
+      <DependentUpon>201601071557467_BeFree.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -316,6 +328,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601062139560_Hello.resx">
       <DependentUpon>201601062139560_Hello.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601071428387_HappyDay.resx">
+      <DependentUpon>201601071428387_HappyDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601071512228_CanDo.resx">
+      <DependentUpon>201601071512228_CanDo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601071557467_BeFree.resx">
+      <DependentUpon>201601071557467_BeFree.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

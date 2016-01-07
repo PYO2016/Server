@@ -10,6 +10,7 @@ namespace Pyo_Server.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        /*
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -36,5 +37,6 @@ namespace Pyo_Server.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }

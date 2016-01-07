@@ -24,34 +24,40 @@ namespace Pyo_Server.Controllers
         }
         */
 
-        // GET: api/ParsedTables
-        //[TODO] 변환된 테이블 리스트들 반환(filename이 아닌 해당 파일이 가지고 있는 inner string을 반환해야됨.)
-        public List<ParsedTableInner> GetParsedTables()
+        // GET: api/ParsedTables?pk=asdfasf
+        public List<ParsedTableInner> GetParsedTables(String pk)
         {
             IQueryable<ParsedTable> tables = db.ParsedTables;
             List<ParsedTableInner> returnVal = new List<ParsedTableInner>();
             foreach (ParsedTable table in tables)
             {
-                //table.filename을 이용해서 해당 .txt파일 안에 있는 html 문자열을 긁어와서 아래의 생성자의 3번째 파라미터에 넣는다.
-                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, table.filename, table.time, table.fk_CapturedImages));
+                if (table.fk_User != pk)
+                    continue;
+
+                returnVal.Add(new ParsedTableInner(table.pk, table.fk_User, table.isProccessed, table.filename, table.result, table.time));
             }
             return returnVal;
         }
 
-        // GET: api/ParsedTables/5
+        // GET: api/ParsedTables?pk=asdfasf/5
         [ResponseType(typeof(ParsedTable))]
         //[TODO] 해당 id(primary key)에 해당되는 값 반환
-        public IHttpActionResult GetParsedTable(int id)
+        public IHttpActionResult GetParsedTable(String pk, int id)
         {
             ParsedTable parsedTable = db.ParsedTables.Find(id);
             if (parsedTable == null)
             {
                 return NotFound();
             }
+            else if (pk != parsedTable.fk_User)
+            {
+                return BadRequest();
+            }
 
             return Ok(parsedTable);
         }
 
+        /*
         // PUT: api/ParsedTables/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutParsedTable(int id, ParsedTable parsedTable)
@@ -86,7 +92,8 @@ namespace Pyo_Server.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+*/
+        /*
         // POST: api/ParsedTables
         [ResponseType(typeof(ParsedTable))]
         public IHttpActionResult PostParsedTable(ParsedTable parsedTable)
@@ -101,15 +108,24 @@ namespace Pyo_Server.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = parsedTable.pk }, parsedTable);
         }
+        */
 
-        // DELETE: api/ParsedTables/5
+        // DELETE: api/ParsedTables?pk=asdfasf/5
         [ResponseType(typeof(ParsedTable))]
-        public IHttpActionResult DeleteParsedTable(int id)
+        public IHttpActionResult DeleteParsedTable(String pk, int id)
         {
             ParsedTable parsedTable = db.ParsedTables.Find(id);
             if (parsedTable == null)
             {
                 return NotFound();
+            }
+            else if (parsedTable.isProccessed == false)
+            {
+                return BadRequest();
+            }
+            else if (parsedTable.fk_User != pk)
+            {
+                return BadRequest();
             }
 
             db.ParsedTables.Remove(parsedTable);
